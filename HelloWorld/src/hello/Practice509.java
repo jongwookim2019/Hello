@@ -18,16 +18,36 @@ public class Practice509 {
 			int selectNo = scanner.nextInt();
 
 			if (selectNo == 1) {
-				System.out.println("학생수");
+				System.out.print("학생수: ");
 				studentNum = scanner.nextInt();
-			}else if(selectNo == 21) {
+				scores = new int[studentNum];
+			} else if (selectNo == 2) {
 				for (int i = 0; i < studentNum; i++) {
+					System.out.print("scores[" + i + "]> ");
 					scores[i] = scanner.nextInt();
-					System.out.println(scores[i]);
-
 				}
-			}
-		}
+			} else if (selectNo == 3) {
+				for (int i = 0; i < scores.length; i++) {
+					System.out.println("scores[ " + i + " ]: " + scores[i]);
+				}
+			} else if (selectNo == 4) {
+				double avg = 0.0;
+				int Max = 0, sum =0;
+				for (int i = 0; i < scores.length; i++) {				
+					Max = (Max > scores[i]? Max : scores[i]);
+						sum += scores[i];
+					
+				}
+				avg =(double) sum / scores.length;
+				System.out.println("최대점수는 : "+Max);
+				System.out.println("평균점수는 : %.3f" + avg);
 
+			} else if (selectNo == 5) {
+				System.out.println("프로그램 종료");
+				break;
+			}
+
+		}
 	}
+
 }

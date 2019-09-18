@@ -1,4 +1,4 @@
-package helloWorld;
+package hello;
 
 import java.util.Scanner;
 
