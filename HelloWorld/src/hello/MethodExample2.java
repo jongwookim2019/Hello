@@ -42,7 +42,7 @@ public class MethodExample2 {
 				}
 				avg = (double) sum / scores.length;
 				System.out.println("최대값은: " + maxValue);
-				System.out.print(avg);
+				System.out.printf("평균은: %.3f\"% %2d", avg);
 				System.out.println();
 			} else if (selectNo == 5) { // 종료.
 				run = false;
