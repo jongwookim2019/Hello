@@ -6,6 +6,9 @@ public class CalcExample {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		Calculator cal = new Calculator();
+		Calculator.plus(23.5,10.2); //static 클래스 차원에서 쓸일은 잘 없다.
+		Calculator.minus(22.5,10.3);
+		
 		//응용인데 봉인
 //		int [] ary = new int[2];
 //		int i = 0;

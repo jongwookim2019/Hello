@@ -2,6 +2,11 @@ package hello;
 
 public class Calender {
 	public static void main(String[] args) {
+		String [] Sday = {"sun","mon","tue","wed","tus","fri","sat"};
+		for (int i=0; i < Sday.length; i++) {
+			System.out.printf("%4s",Sday[i]);
+		}
+			System.out.println();
 		int month = 5;
 		int monthDay = getMonthday(month);
 		int firstDay = getFirstday(month);
@@ -10,7 +15,7 @@ public class Calender {
 		}
 		for (int i = 1; i <= monthDay; i++) {
 			System.out.printf("%4d", i);
-			if ((firstDay + i) % 7 == 0) {
+			if ((firstDay + i -1) % 7 == 0) {
 				System.out.println();
 			}
 		}

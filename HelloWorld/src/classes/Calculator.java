@@ -1,6 +1,13 @@
 package classes;
 
 public class Calculator {
+	static double pi = 3.14;
+	static double plus(double x, double y) {
+		return x + y;
+	}
+	static double minus(double a, double b) {
+		return a - b;
+	}
 		int plus(int x, int y) {
 		int result = x + y;
 		return result;
