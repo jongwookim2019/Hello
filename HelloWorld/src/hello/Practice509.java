@@ -40,7 +40,7 @@ public class Practice509 {
 				}
 				avg =(double) sum / scores.length;
 				System.out.println("최대점수는 : "+Max);
-				System.out.println("평균점수는 : %.3f" + avg);
+				System.out.println("평균점수는 : " + avg);
 
 			} else if (selectNo == 5) {
 				System.out.println("프로그램 종료");
