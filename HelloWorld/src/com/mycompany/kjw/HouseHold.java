@@ -1,5 +1,7 @@
 package com.mycompany.kjw;
 
+import java.util.Scanner;
+
 public class HouseHold {
 public static void main(String[] args) {
 	int balance =0, importation =0, expence =0, table =1;

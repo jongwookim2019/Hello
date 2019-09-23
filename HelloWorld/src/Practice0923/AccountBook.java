@@ -1,4 +1,4 @@
-package hello;
+package Practice0923;
 
 import java.util.Scanner;
 
@@ -70,7 +70,7 @@ public class AccountBook {
 			} else if (num == 8) {
 				for (int k = 0; k < Ac.length; k++) {
 					for (int l = 0; l < Ac[k].length; l++) {
-						System.out.printf("%15d", Ac[k][l]);
+						System.out.printf("%4d", Ac[k][l]);
 						if (l == 5) {
 							System.out.println();
 						}
