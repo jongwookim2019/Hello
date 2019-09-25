@@ -1,4 +1,4 @@
-package Practice0923;
+package Practice0924;
 
 public class Member {
 	private String name;

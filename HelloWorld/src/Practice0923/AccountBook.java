@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class AccountBook {
 	public static void main(String[] args) {
 		boolean run = true;
+		
 		Scanner sc = new Scanner(System.in);
 		int[][] Ac = new int[10][6];
 		int balance = 0, result = 0, income = 0, expense = 0, result2 = 0;
