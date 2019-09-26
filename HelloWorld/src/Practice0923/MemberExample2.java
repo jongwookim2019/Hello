@@ -66,48 +66,45 @@ public class MemberExample2 {
 		String id = sc.nextLine();
 		System.out.println("Password를 입력하시오");
 		String pwd = sc.nextLine();
-		Member getIP = new Member(id, pwd);
-		for (Member a : memberArray) {
-			if (a != null & getIP.getId().equals(a.getId()) & getIP.getPassword().equals(a.getPassword())) {
-				System.out.println("Name: " + a.getName() + ", Age: " + a.getAge());
-				
-			} else if (getIP.getId().equals(a.getId()) & !getIP.getPassword().equals(a.getPassword())) {
-				System.out.println("패스워드가 잘못되었습니다.");
-
-			} else if (!getIP.getId().equals(a.getId()) & !getIP.getPassword().equals(a.getPassword())) {
-				System.out.println("존재하지 않는 Id입니다.");
-
-//		boolean isId = false, i1sPw = false;
-//		String name = null;
-//		int age = 0;
+//		Member getIP = new Member(id, pwd);
 //		for (Member a : memberArray) {
-//			if (a != null && a.getId().equals(id)) {
-//				if (a.getPassword().contentEquals(pwd)) {
-//					isId = true;
-//					isPw = true;
-//					name= a.getName();
-//					age = a.getAge();
-//					break;
-//				} else {
-//					isId = true;
-//					isPw = false;
-//					break;
-//				}
-//			} else {
-//				isId = false;
-//				isPw = false;
-//			}
-//		}
-//		if (isId == true && isPw == true)
-//			System.out.println("이름은: " + name + "나이는: " + age);
-//		else if (isId == true && isPw == false)
-//			System.out.println("비번이 틀립니다.");
-//		else if (isId == false && isPw == false)
-//			System.out.println("존재하지 않는 아이디입니다.");
+//			if (a != null & getIP.getId().equals(a.getId()) & getIP.getPassword().equals(a.getPassword())) {
+//				System.out.println("Name: " + a.getName() + ", Age: " + a.getAge());
+//				
+//			} else if (getIP.getId().equals(a.getId()) & !getIP.getPassword().equals(a.getPassword())) {
+//				System.out.println("패스워드가 잘못되었습니다.");
+//
+//			} else if (!getIP.getId().equals(a.getId()) & !getIP.getPassword().equals(a.getPassword())) {
+//				System.out.println("존재하지 않는 Id입니다.");
 
+		boolean isId = false, isPw = false;
+		String name = null;
+		int age = 0;
+		for (Member a : memberArray) {
+			if (a != null && a.getId().equals(id)) {
+				if (a.getPassword().contentEquals(pwd)) {
+					isId = true;
+					isPw = true;
+					name = a.getName();
+					age = a.getAge();
+					break;
+				} else {
+					isId = true;
+					isPw = false;
+					break;
+				}
+			} else {
+				isId = false;
+				isPw = false;
 			}
-
 		}
+		if (isId == true && isPw == true)
+			System.out.println("이름은: " + name + "나이는: " + age);
+		else if (isId == true && isPw == false)
+			System.out.println("비번이 틀립니다.");
+		else if (isId == false && isPw == false)
+			System.out.println("존재하지 않는 아이디입니다.");
 
 	}
+
 }
