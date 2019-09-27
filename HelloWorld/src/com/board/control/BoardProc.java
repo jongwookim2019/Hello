@@ -2,17 +2,21 @@ package com.board.control;
 
 import java.util.Scanner;
 
+import com.board.impl.BoardServiceImpl;
 import com.board.model.Board;
+import com.board.model.BoardService;
 
 public class BoardProc {
 	Scanner sc = new Scanner(System.in);
 	Board[] boardAry = new Board[10];
+	BoardService service = new BoardServiceImpl();
 
 	public void execute() {
 		while (true) {
 			System.out.println("메뉴 선택 하세요.");
-			System.out.println("1.작성 2.단건조회 3.전체조회 4.종료");
-			int menu = sc.nextInt(); sc.nextLine();
+			System.out.println("1.작성 2.단건조회 3.전체조회 4.삭제 5.변경 6.종료");
+			int menu = sc.nextInt();
+			sc.nextLine();
 			if (menu == 1) {
 				writeBoard();
 			} else if (menu == 2) {
@@ -20,6 +24,10 @@ public class BoardProc {
 			} else if (menu == 3) {
 				getBoardList();
 			} else if (menu == 4) {
+				delBoard();
+			} else if (menu == 5) {
+				updateBoard();
+			} else if (menu == 6) {
 				System.out.println("프로그램을 종료합니다.");
 				break;
 			}
@@ -32,6 +40,7 @@ public class BoardProc {
 		System.out.println("글작성");
 		System.out.println("게시글 번호 입력:");
 		int boardNo = sc.nextInt();
+		sc.nextLine();
 		System.out.println("제목 입력:");
 		String title = sc.nextLine();
 		System.out.println("내용 입력:");
@@ -39,33 +48,70 @@ public class BoardProc {
 		System.out.println("작성자 입력:");
 		String writer = sc.nextLine();
 		Board board = new Board(boardNo, title, contents, writer);
-		for (int i = 0; i < boardAry.length; i++) {
-			if (boardAry[i] == null) {
-				boardAry[i] = board;
-				break;
-			}
-
-		}
+		service.writeBoard(board, boardAry);
+//		for (int i = 0; i < boardAry.length; i++) {
+//			if (boardAry[i] == null) {
+//				boardAry[i] = board;
+//				break;
+//			}
+//
+//		}
 	}
 
 	public void getBoard() {
 		System.out.println("한건조회");
 		System.out.println("조회할 번호를 입력");
 		int boardNo = sc.nextInt();
-		for (int i = 0; i < boardAry.length; i++) {
-			if (boardAry != null && boardAry[i].getBoardNo() == boardNo) {
-				System.out.println(boardAry[i].getTitle() + "," + boardAry[i].getBoardNo() + ","+ boardAry[i].getContents() + "," + boardAry[i].getWriter());
-			}
-		}
+		Board board = service.getBoard(boardNo, boardAry);
+		System.out.println(board);
+//		for (int i = 0; i < boardAry.length; i++) {
+//			if (boardAry != null && boardAry[i].getBoardNo() == boardNo) {
+//				System.out.println(boardAry[i].getTitle() + "," + boardAry[i].getBoardNo() + ","+ boardAry[i].getContents() + "," + boardAry[i].getWriter());
+//			}
+//		}
 	}
 
 	public void getBoardList() {
 		System.out.println("전체글조회");
-		for (int i = 0; i < boardAry.length; i++) {
-			if (boardAry != null) {
-				System.out.println(boardAry[i].getTitle() + "," + boardAry[i].getBoardNo() + ","+ boardAry[i].getContents() + "," + boardAry[i].getWriter());
+		Board[] resultAry = service.getBoardList(boardAry);
+		for (Board brd : resultAry) {
+			if (brd != null) {
+				System.out.println(brd);
 			}
 		}
+//		for (int i = 0; i < boardAry.length; i++) {
+//			if (boardAry != null) {
+//				System.out.println(boardAry[i].getTitle() + "," + boardAry[i].getBoardNo() + ","
+//						+ boardAry[i].getContents() + "," + boardAry[i].getWriter());
+//			}
+//		}
+	}
 
+	public void delBoard() {
+		System.out.println("한건삭제");
+		System.out.println("삭제할 번호를 입력");
+		int boardNo = sc.nextInt();
+		service.delBoard(boardNo, boardAry);
+		System.out.println(boardNo + ": 번이 삭제되었습니다.");
+
+//			for (int i = 0; i < boardAry.length; i++) {
+//				if (boardAry != null && boardAry[i].getBoardNo() == boardNo) {
+//					System.out.println(boardAry[i].getTitle() + "," + boardAry[i].getBoardNo() + ","+ boardAry[i].getContents() + "," + boardAry[i].getWriter());
+//				}
+//			}
+	}
+
+	public void updateBoard() {
+		System.out.println("변경할 글번호:");
+		int boardNo = sc.nextInt();
+		sc.nextLine();
+		System.out.println("변경할 제목 :");
+		String title = sc.nextLine();
+		System.out.println("변경할 내용:");
+		String content = sc.nextLine();
+		System.out.println("변경할 작성자:");
+		String writer = sc.nextLine();
+		Board board = new Board(boardNo, title, content, writer);
+		service.updateBoard(board, boardAry);
 	}
 }

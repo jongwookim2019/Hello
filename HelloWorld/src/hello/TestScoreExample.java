@@ -66,24 +66,26 @@ public class TestScoreExample {
 			} else if (menu == 4) {
 				System.out.println("전체 통계를 출력합니다.");
 				int sum = 0;
+				int count = 0;
 				for (TestScore a : scoreArray) {
 					if (a != null) {
 						sum += a.getKorean() + a.getEnglish() + a.getMeth();
-					} else {
-						System.out.println("반 전체 점수 >:" + sum + " 반 전체 평균>: " + (double) sum / 3);
-						break;
+						count++;
 
 					}
 
 				}
+				System.out.println("반 전체 점수 >:" + sum + " 반 전체 평균>: " + (double) sum / (count));
 
 			} else if (menu == 5) {
 
-				TestScore temp = new TestScore();
+				TestScore temp[] = new TestScore[scoreArray.length];
+
 //				int maxValue = 0;
-//				for (TestScore a : scoreArray) {
-//					maxValue = (maxValue > a.Sum(a.getKorean(), a.getEnglish(), a.getMeth()) ? maxValue : a.Sum(a.getKorean(), a.getEnglish(), a.getMeth()));
-//					 orderArray[a.Sum(a.getKorean(), a.getEnglish(), a.getMeth())] += maxValue;
+//				for (int i =0; i<scoreArray.length; i++) {
+//					maxValue = (maxValue > Sum(i.getKorean(), i.getEnglish(), i.getMeth()) ? maxValue : Sum(i.getKorean(), i.getEnglish(), i.getMeth()));
+//					 orderArray[0] = maxValue;
+
 //				}
 
 			} else if (menu == 6) {
@@ -95,5 +97,4 @@ public class TestScoreExample {
 
 		System.out.println("프로그램을 종료합니다.");
 	}
-
 }

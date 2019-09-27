@@ -66,7 +66,7 @@ public class TestScore {
 	}
 
 	double TestScore(int korean, int english, int meth) {
-		return (double) korean + english + meth / 3;
+		return (double) (korean + english + meth) / 3;
 
 	}
 
