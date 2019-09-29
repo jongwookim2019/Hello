@@ -1,5 +1,6 @@
 package hello;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 import Practice0924.Member;
@@ -78,15 +79,15 @@ public class TestScoreExample {
 				System.out.println("반 전체 점수 >:" + sum + " 반 전체 평균>: " + (double) sum / (count));
 
 			} else if (menu == 5) {
+				Arrays.sort(scoreArray);
+				for (TestScore a : scoreArray) {
+					if (a != null) {
+						System.out.println(" 번호>: " + a.getStudentNo() + " 이름>: " + a.getStudentName() + " 국어>: "
+								+ a.getKorean() + " 영어>: " + a.getEnglish() + " 수학>: " + a.getMeth() + " 총점>: "
+								+ (a.getKorean() + a.getEnglish() + a.getMeth()));
 
-				TestScore temp[] = new TestScore[scoreArray.length];
-
-//				int maxValue = 0;
-//				for (int i =0; i<scoreArray.length; i++) {
-//					maxValue = (maxValue > Sum(i.getKorean(), i.getEnglish(), i.getMeth()) ? maxValue : Sum(i.getKorean(), i.getEnglish(), i.getMeth()));
-//					 orderArray[0] = maxValue;
-
-//				}
+					}
+				}
 
 			} else if (menu == 6) {
 				run = false;
