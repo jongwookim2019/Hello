@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import Practice0924.Member;
 
-public class TestScoreExample {
+public class TestScoreExample  {
 	static Scanner sc = new Scanner(System.in);
 	public static TestScore[] scoreArray = new TestScore[100];
 	public static TestScore[] orderArray = new TestScore[scoreArray.length];

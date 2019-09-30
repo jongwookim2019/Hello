@@ -1,12 +1,18 @@
 package hello;
 
-public class TestScore {
+public class TestScore implements Comparable<TestScore> {
 
 	String studentNo;
 	String studentName;
 	int korean;
 	int english;
 	int meth;
+	int sum = korean+english+meth;
+
+
+	public TestScore(int sum) {
+		this.sum = sum;
+	}
 
 	public String getStudentNo() {
 		return studentNo;
@@ -74,4 +80,11 @@ public class TestScore {
 		return korean+english+meth;
 
 	}
+
+	@Override
+	public int compareTo(TestScore o) {
+		return sum.compareTo(o.sum);
+	}
+
+	
 }
