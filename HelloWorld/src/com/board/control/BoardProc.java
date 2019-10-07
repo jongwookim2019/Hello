@@ -1,15 +1,21 @@
 package com.board.control;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-import com.board.impl.BoardServiceImpl;
+import com.board.impl.BoardCollectionImpl;
+//import com.board.impl.BoardServiceImpl;
 import com.board.model.Board;
-import com.board.model.BoardService;
+import com.board.model.BoardCollection;
+//import com.board.model.BoardService;
 
 public class BoardProc {
 	Scanner sc = new Scanner(System.in);
-	Board[] boardAry = new Board[10];
-	BoardService service = new BoardServiceImpl();
+//	Board[] boardAry = new Board[10];
+	List<Board> boardAry = new ArrayList<>();
+//	BoardService service = new BoardServiceImpl();
+	BoardCollection service = new BoardCollectionImpl();
 
 	public void execute() {
 		while (true) {
@@ -24,7 +30,7 @@ public class BoardProc {
 				sc.nextLine();
 //				e.printStackTrace();
 			}
-			sc.nextLine();
+		
 			if (menu == 1) {
 				writeBoard();
 			} else if (menu == 2) {
@@ -78,10 +84,10 @@ public class BoardProc {
 //			}
 //		}
 	}
-
+//	List<Board> boardAry = new ArrayList<>();
 	public void getBoardList() {
 		System.out.println("전체글조회");
-		Board[] resultAry = service.getBoardList(boardAry);
+		List<Board> resultAry = service.getBoardList(boardAry);
 		for (Board brd : resultAry) {
 			if (brd != null) {
 				System.out.println(brd);
