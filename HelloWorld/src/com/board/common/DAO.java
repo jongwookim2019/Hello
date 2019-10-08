@@ -10,7 +10,7 @@ public class DAO {
 		String user = "hr";
 		String passwd = "hr";
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-		String driver = "Oracle.jdbc.driver.OracleDriver";
+		String driver = "oracle.jdbc.driver.OracleDriver";
 
 		try {
 			Class.forName(driver);

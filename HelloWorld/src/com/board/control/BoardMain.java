@@ -5,4 +5,8 @@ public class BoardMain {
 		BoardProc bp = new BoardProc();
 		bp.execute();
 	}
+
+	public static void main(String[] args) {
+		employees
+	}
 }
