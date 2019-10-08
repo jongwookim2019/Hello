@@ -103,11 +103,19 @@ public class EmpDAO {
 	public Employee getEmployee(int empId) {
 		conn = DAO.getConnect();
 		String sql = "select * from employees where employee_id = ?";
+		String sql1 = "{? = call get_dept_name(?)}";
 		Employee emp = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, empId);
 			rs = pstmt.executeQuery();
+			
+			CallableStatement cstmt = conn.prepareCall(sql1);
+			cstmt.registerOutParameter(1, java.sql.Types.VARCHAR);
+			cstmt.registerOutParameter(2, empId);
+			cstmt.execute();
+			String deptName = cstmt.getString(1);
+			
 			if (rs.next()) {
 				emp = new Employee();
 				emp.setEmployeeId(rs.getInt("employee_id"));
@@ -117,6 +125,7 @@ public class EmpDAO {
 				emp.setHireDate(rs.getString("hire_date"));
 				emp.setJobId(rs.getString("job_id"));
 				emp.setSalary(rs.getInt("salary"));
+				emp.setDeptName(deptName);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
