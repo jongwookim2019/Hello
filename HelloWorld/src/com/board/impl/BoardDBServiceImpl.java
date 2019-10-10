@@ -7,7 +7,9 @@ import com.board.model.BoardDBService;
 
 public class BoardDBServiceImpl implements BoardDBService {
 	BoardDBDAO dao = new BoardDBDAO();
-	
+	public static String loginId(String id) {
+		String id = dao.
+	}
 	@Override
 	public String loginCheck(String id, String passwd) {
 		String name = dao.getUserName(id,  passwd);
@@ -16,7 +18,7 @@ public class BoardDBServiceImpl implements BoardDBService {
 
 	@Override
 	public void insertBoard(BoardDB board) {
-		// TODO Auto-generated method stub
+		dao.insertBoard(board);
 		
 	}
 
