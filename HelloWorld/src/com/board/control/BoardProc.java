@@ -17,7 +17,11 @@ public class BoardProc {
 //	BoardService service = new BoardServiceImpl();
 	BoardCollection service = new BoardCollectionImpl();
 
+	
+	
 	public void execute() {
+		login_check();
+		
 		while (true) {
 			System.out.println("메뉴 선택 하세요.");
 			System.out.println("1.작성 2.단건조회 3.전체조회 4.삭제 5.변경 6.종료");
@@ -127,5 +131,16 @@ public class BoardProc {
 		String writer = sc.nextLine();
 		Board board = new Board(boardNo, title, content, writer);
 		service.updateBoard(board, boardAry);
+	}
+	public void login_check() {
+			while(true) {
+				System.out.println("id 입력.");
+				String id = sc.nextLine();
+				System.out.println("password 입력.");
+				String passwd = sc.nextLine();
+				
+				if(id.equals())
+				
+			}
 	}
 }
