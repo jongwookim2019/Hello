@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	<script>
+		function getGrade() {
+			document.write("<table border :1px;>")
+			document.write("<tr>")
+			for (a = 1; a <= 9; a++) {
+				document.write("<td>" + "<b>" + a + " 단" + "</b>" + "</td>");
+			}
+			document.write("</tr>")
+
+			for (i = 1; i <= 9; i++) {
+				document.write("<tr>")
+				for (j = 1; j <= 9; j++) {
+					document.write("<td>" + j + "*" + i + "=" + (j * i)
+							+ "</td>");
+				}
+				document.write("</tr>")
+			}
+			document.write("</table>")
+		}
+		getGrade();
+	</script>
+
+</body>
+</html>

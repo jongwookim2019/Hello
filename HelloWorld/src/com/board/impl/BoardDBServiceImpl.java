@@ -7,9 +7,7 @@ import com.board.model.BoardDBService;
 
 public class BoardDBServiceImpl implements BoardDBService {
 	BoardDBDAO dao = new BoardDBDAO();
-	public static String loginId(String id) {
-		String id = dao.
-	}
+	
 	@Override
 	public String loginCheck(String id, String passwd) {
 		String name = dao.getUserName(id,  passwd);
@@ -24,32 +22,30 @@ public class BoardDBServiceImpl implements BoardDBService {
 
 	@Override
 	public List<BoardDB> getEmpList() {
-		// TODO Auto-generated method stub
-		return null;
+		List<BoardDB> list = dao.getEmpList();
+		return list;
 	}
 
 	@Override
 	public BoardDB getBoard(int boardNo) {
-		// TODO Auto-generated method stub
-		return null;
+		dao.getBoard(boardNo);
+		return dao.getBoard(boardNo);
 	}
 
 	@Override
 	public List<BoardDB> getReply(int boardNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.getReplyList(boardNo);
 	}
 
 	@Override
 	public void insertReply(BoardDB board) {
-		// TODO Auto-generated method stub
+		dao.insertReply(board);
 		
 	}
 
 	@Override
 	public void updateBoard(BoardDB board) {
-		// TODO Auto-generated method stub
-		
+		dao.updateBoard(board);
 	}
 
 	@Override
