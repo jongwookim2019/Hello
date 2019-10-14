@@ -15,16 +15,118 @@ public class BoardDBDAO {
 	ResultSet rs = null;
 	PreparedStatement pstmt = null;
 
+//	public void deleteBoard2(BoardDB board) { // 2번 방식
+//		conn = DAO.getConnect();
+//		List<BoardDB> list = getReplyList(board.getBoardNo());
+//		if (list.size() > 0) {
+//			// 삭제못함.
+//			System.out.println("댓글이 존재합니다.");
+//		} else {
+//			String sql = " delete from boards where board_no =?";
+//			try {
+//				pstmt = conn.prepareStatement(sql);
+//				pstmt.setInt(1, board.getBoardNo());
+//				int r = pstmt.executeUpdate();
+//				System.out.println(r + " 건이 삭제되었습니다.");
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			} finally {
+//				try {
+//					conn.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//
+//	} 
+	public void deleteBoard(BoardDB board) {
+		conn = DAO.getConnect();
+		String sql = " delete from boards where board_no =?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, board.getBoardNo());
+			int r = pstmt.executeUpdate();
+			System.out.println(r + " 건이 삭제되었습니다.");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	public boolean checkForReply(int boardNo) {
+		conn = DAO.getConnect();
+		String sql = " select count(*) as cnt from boards " + "where orig_no =?";
+		int cnt = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				cnt = rs.getInt("cnt");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if (cnt > 0)
+			return true;
+		else
+			return false;
+
+	}
+
+	public boolean checkResponsibility(BoardDB board) {
+		conn = DAO.getConnect();
+		String sql = " select count(*) as cnt from boards " + "where orig_no is null and board_no=? and writer=?";
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, board.getBoardNo());
+			pstmt.setString(2, board.getWriter());
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = rs.getInt("cnt");
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if (result > 0)
+			return true;
+		else
+			return false;
+	}
+
 	public void updateBoard(BoardDB board) {
+		System.out.println("content: " + board.getContent());
 		conn = DAO.getConnect();
 		String sql = " update boards set orig_no = orig_no ";
 		if (board.getTitle() != null && !board.getTitle().equals("")) {
-			sql += " ,title=? ";
+			sql += ",title=? ";
 		}
 		if (board.getContent() != null && !board.getContent().equals("")) {
-			sql += " ,content=? ";
+			sql += ",content=? ";
 		}
-		sql += " where board_no=? and orig_no is null";
+		sql += "where board_no=? and orig_no is null";
 		int n = 0;
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -35,8 +137,29 @@ public class BoardDBDAO {
 				pstmt.setString(++n, board.getContent());
 			}
 			pstmt.setInt(++n, board.getBoardNo());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void deleteReply(BoardDB board) {
+		conn = DAO.getConnect();
+		String sql = "delete boards where orig_no = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, board.getOrigNo());
+			int r = pstmt.executeUpdate();
+			System.out.println(r + " 건이 삭제되었습니다.");
 
 		} catch (SQLException e) {
+
 			e.printStackTrace();
 		} finally {
 			try {
@@ -70,23 +193,22 @@ public class BoardDBDAO {
 		}
 	}
 
-	public List<BoardDB> getEmpList() {
-		List<BoardDB> list = new ArrayList<>();
+	public List<BoardDB> getBoardList() {
 		conn = DAO.getConnect();
-		String sql = "select * from boards";
-		BoardDB brd = null;
+		String sql = "select * from boards where orig_no is null order by 1 desc";
+		List<BoardDB> list = new ArrayList<>();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-
 			while (rs.next()) {
 				BoardDB board = new BoardDB();
 				board.setBoardNo(rs.getInt("board_no"));
 				board.setTitle(rs.getString("title"));
-				board.setContent(rs.getString("content"));
 				board.setWriter(rs.getString("writer"));
+				board.setContent(rs.getString("content"));
 				board.setCreationdate(rs.getString("creation_date"));
-				list.add(brd);
+				board.setOrigNo(rs.getInt("orig_no"));
+				list.add(board);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -97,8 +219,8 @@ public class BoardDBDAO {
 				e.printStackTrace();
 			}
 		}
-		return list;
 
+		return list;
 	}
 
 	public List<BoardDB> getReplyList(int boardNo) {

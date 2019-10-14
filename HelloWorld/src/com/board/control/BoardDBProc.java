@@ -18,19 +18,19 @@ public class BoardDBProc {
 		while (true) {
 			int menu = 0;
 			System.out.println("메뉴 선택 하세요.");
-			System.out.println("1.게시글 작성 2.게시글 리스트 3.한건 조회 4.수정  6.수정 7.삭제  8.종료");
+			System.out.println("1.게시글 작성 2.게시글 리스트 3.한건 조회 4.수정  5.삭제  8.종료");
 			menu = sc.nextInt();
 			sc.nextLine();
 			if (menu == 1) {
 				writeBoard();
 			} else if (menu == 2) {
-				getEmpList();
+				getBoardList();
 			} else if (menu == 3) {
 				getBoard();
 			} else if (menu == 4) {
 				updateBoard();
 			} else if (menu == 5) {
-
+				deleteBoard();
 			} else if (menu == 6) {
 
 			} else if (menu == 7) {
@@ -41,6 +41,14 @@ public class BoardDBProc {
 			}
 
 		}
+	}
+	public void deleteBoard() {
+		System.out.println("삭제할 글 번호:");
+		int boardNo = sc.nextInt(); sc.nextLine();
+		BoardDB board = new BoardDB();
+		board.setBoardNo(boardNo);
+		board.setWriter(loginId);
+		service.deleteBoard(board);
 	}
 	public void updateBoard() {
 		System.out.println("변경할 글 번호:");
@@ -53,18 +61,22 @@ public class BoardDBProc {
 		board.setBoardNo(boardNo);
 		board.setTitle(title);
 		board.setContent(content);
-		
+		board.setWriter(loginId);
 		service.updateBoard(board);
 		
 	}
 
-	public void getEmpList() {
-		System.out.println("게시글을 조회합니다.");
-		List<BoardDB> brd = service.getEmpList();
-		for (BoardDB BoardDB : brd) {
-			System.out.println(BoardDB);
+	public void getBoardList() {
+		System.out.println("-------[전체글]-------");
+		System.out.println("==============================================");
+		System.out.println("글번호 |  제목   |    내용     |  작성자   | 작성일자 ");
+		System.out.println("==============================================");
+		List<BoardDB> list = service.getBoardList();
+		for (BoardDB b : list) {
+			System.out.println(b.getBoardNo() + " | " + b.getTitle() + " | " + b.getContent() + " | " + b.getWriter()
+					+ " | " + b.getCreationdate());
 		}
-
+		System.out.println("==============================================");
 	}
 
 	public void getBoard() {
@@ -90,7 +102,7 @@ public class BoardDBProc {
 			} else {
 				System.out.println("[댓글]이 없습니다.");
 			}
-			System.out.println("1. 댓글작성 2. 이전메뉴");
+			System.out.println("1. 댓글작성 2. 댓글삭제  3. 이전메뉴");
 			int subMenu = 0;
 			subMenu = sc.nextInt();
 			sc.nextLine();
@@ -102,6 +114,12 @@ public class BoardDBProc {
 				board1.setOrigNo(boardNo);
 				board1.setWriter(loginId);
 				service.insertReply(board1);
+			} else if (subMenu == 2){
+				System.out.println("댓글 삭제:");
+				int boardNo1 = sc.nextInt();
+				BoardDB board1 = new BoardDB();
+				board1.setWriter(loginId);
+				service.deleteReply(board1);
 			} else {
 				return;
 			}

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+div {
+	color: red;
+	font-size: 20px;
+}
+
+span {
+	width: 250px;
+	height: 29px;
+	margin: 3px;
+	vertical-align: middle;
+}
+
+span.t1 {
+	width: 400px;
+	height: 29px;
+	border: 0px;
+	display: inline-block;
+}
+
+span.t2 {
+	color: grey;
+	width: 450px;
+	height: 29px;
+	border: 0px;
+	display: inline-block;
+}
+
+span.t3 {
+	color: blue;
+	width: 450px;
+	height: 29px;
+	border: 0px;
+	display: inline-block;
+}
+
+input[type=text] {
+	height: 29px;
+	margin: 3px;
+	vertical-align: middle;
+	border: 1px solid;
+	display: inline-block;
+	box-sizing: border-box;
+}
+
+input[type=text].b1 {
+	width: 250px;
+}
+
+input[type=text].b2 {
+	width: 500px;
+}
+
+input[type=text].b3 {
+	width: 80px;
+}
+
+input[type=text].b4 {
+	width: 200px;
+}
+
+input[type=text].b5 {
+	width: 800px;
+}
+
+tr, td {
+	border: 1px solid;
+	height: 50px;
+}
+
+table.p1 {
+	border: 1px solid black;
+	border-collapse: collapse;
+	width: 1200px;
+	height: 600px;
+}
+
+table.p2 {
+	border: none;
+	width: 1200px;
+	height: 100px;
+	width: 1200px;
+}
+.myButton {
+				box-shadow:inset 0px 1px 0px 0px #ffffff;
+				background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+				background-color:#ffffff; border-radius:6px; border:1px solid
+				#dcdcdc; display:inline-block; cursor:pointer; color:#666666;
+				font-family:Arial; font-size:15px; font-weight:bold; padding:6px
+				24px; text-decoration:none; text-shadow:0px 1px 0px #ffffff; }
+</style>
+</head>
+
+<body>
+	<form>
+		<div>(주)예담직업전문학교 일반회원가입</div>
+		<ul>
+			<li><b>이름, 생년월일은 성별, 이메일</b>은 본인확인 및 교육확인을 위해 사용됩니다. <br>
+				신분증에 기재된 정보와 하나의 메일로 통일해서 적어주십시오.</li>
+			<li><b>이름, 생년월일은 성별, 이메일</b>과 훈련정보를 대조해 교육중이나 수료생의 경우 <br>
+				마이페이지의 정보변경에서 바로 수료/수강생회원으로 전환이 가능합니다.</li>
+			<li>회원가입후 마이페이지에서 회원탈퇴가 가능하며, 온라인상에서 정보는 보관되지 않습니다.</li>
+		</ul>
+		<b>
+			<table class="p1">
+				<tr>
+					<td width="200" align="center">이 름<font color="red">&#42;</font></td>
+					<td width="1000">&nbsp;<input type="text" id="fname"
+						name="fname" class="b1">
+
+
+					</td>
+				</tr>
+				<tr>
+					<td align="center">아이디<font color="red">&#42;</font></td>
+					<td>&nbsp;<input type="text" id="fname" name="fname"
+						class="b1"> <span class="t1">ID는 영문자와 숫자만 사용할 수
+							있습니다.</span></td>
+				</tr>
+				<tr>
+					<td align="center">비밀번호<font color="red">&#42;</font></td>
+					<td>&nbsp;<input type="text" id="fname" name="fname"
+						class="b1"></td>
+				</tr>
+				<tr>
+					<td align="center">비밀번호확인<font color="red">&#42;</font></td>
+					<td>&nbsp;<input type="text" id="fname" name="fname"
+						class="b1"></td>
+				</tr>
+				<tr>
+					<td align="center">생년월일<font color="red">&#42;</font></td>
+					<td><select name="년도">
+							<option value="0" selected>년도&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+							<option value="1992">1992</option>
+							<option value="1993">1993</option>
+							<option value="1994">1994</option>
+							<option value="1995">1995</option>
+					</select> <select name="월">
+							<option value="0" selected>월&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+							<option value="01">1</option>
+							<option value="02">2</option>
+							<option value="03">3</option>
+							<option value="04">4</option>
+					</select> <select name="일">
+							<option value="0" selected>일&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+							<option value="01">1</option>
+							<option value="02">2</option>
+							<option value="03">3</option>
+							<option value="04">4</option>
+					</select> <span class="t2">&#42; 신분증에 기대된 성명, 생년월일, 성별을 입력해 주세요. </span></td>
+				</tr>
+				<tr>
+					<td align="center">성 별<font color="red">&#42;</font></td>
+					<td><input type="radio" name="gender" value="man">남&nbsp;
+						<input type="radio" name="gender" value="woman">여</td>
+				</tr>
+				<tr>
+					<td align="center">이메일<font color="red">&#42;</font></td>
+					<td>&nbsp;<input type="text" id="fname" name="fname"
+						class="b2"> <span class="t2">&#42; 본인확인 및 아이디/비번찾기에
+							사용됩니다. </span></td>
+				</tr>
+				<tr>
+					<td align="center">전화번호<font color="blue">&#42;</font></td>
+					<td><select name="지역번호">
+							<option value="0" selected>선택&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+							<option value="대구">053</option>
+							<option value="서울">02</option>
+							<option value="경기">031</option>
+							<option value="제주">064</option>
+					</select>&nbsp; &#45; &nbsp;<input type="text" id="fname" name="fname"
+						class="b3">&nbsp; &#45; &nbsp;<input type="text"
+						id="fname" name="fname" class="b3"><span class="t3">&#42;전화
+							또는 휴대폰번호중 택1은 필수사항입니다.</span></td>
+				</tr>
+				<tr>
+					<td align="center">휴대폰번호<font color="blue">&#42;</font></td>
+					<td><select name="휴대폰번호">
+							<option value="0" selected>선택&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</option>
+							<option value="010">010</option>
+							<option value="011">011</option>
+							<option value="017">017</option>
+							<option value="018">018</option>
+					</select>&nbsp; &#45; &nbsp;<input type="text" id="fname" name="fname"
+						class="b3">&nbsp; &#45; &nbsp;<input type="text"
+						id="fname" name="fname" class="b3"></td>
+				</tr>
+				<tr>
+					<td align="center">우편번호<font color="red">&#42;</font></td>
+					<td>&nbsp;<input type="text" id="fname" name="fname"
+						class="b4">&nbsp; &#45; &nbsp;<input type="text"
+						id="fname" name="fname" class="b4"><input type="button"
+						onclick="alert('우편번호입니다')" value="우편번호 찾기"></td>
+				</tr>
+				<tr>
+					<td align="center">주 소<font color="red">&#42;</font></td>
+					<td>&nbsp;<input type="text" id="fname" name="fname"
+						class="b5"></td>
+				</tr>
+				<tr>
+					<td align="center">상세주소<font color="red">&#42;</font></td>
+					<td>&nbsp;<input type="text" id="fname" name="fname"
+						class="b5"></td>
+				</tr>
+
+			</table> 
+			<table class="p2">
+			<th align="center">
+				<a href="#" class="myButton" >◎ 일반회원가입</a>
+				</th>
+			</table>
+		</b>
+	</form>
+</body>
+</html>
