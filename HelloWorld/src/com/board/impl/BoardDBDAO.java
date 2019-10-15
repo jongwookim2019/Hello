@@ -88,6 +88,35 @@ public class BoardDBDAO {
 
 	}
 
+	public boolean checkReplyResponsibility(BoardDB board) {
+		conn = DAO.getConnect();
+		String sql = " select count(*) as cnt from boards " + "where orig_no is not null and board_no=? and writer=?";
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, board.getBoardNo());
+			pstmt.setString(2, board.getWriter());
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = rs.getInt("cnt");
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if (result > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public boolean checkResponsibility(BoardDB board) {
 		conn = DAO.getConnect();
 		String sql = " select count(*) as cnt from boards " + "where orig_no is null and board_no=? and writer=?";
@@ -110,10 +139,11 @@ public class BoardDBDAO {
 				e.printStackTrace();
 			}
 		}
-		if (result > 0)
+		if (result > 0) {
 			return true;
-		else
+		} else {
 			return false;
+		}
 	}
 
 	public void updateBoard(BoardDB board) {
@@ -151,7 +181,7 @@ public class BoardDBDAO {
 
 	public void deleteReply(BoardDB board) {
 		conn = DAO.getConnect();
-		String sql = "delete boards where board_no = ?";
+		String sql = "delete boards where board_no = ? and orig_no is not null";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, board.getBoardNo());
@@ -203,7 +233,7 @@ public class BoardDBDAO {
 			while (rs.next()) {
 				BoardDB board = new BoardDB();
 				board.setBoardNo(rs.getInt("board_no"));
-				board.setTitle(rs.getString("title")+"("+rs.getString("reply_cnt")+")");
+				board.setTitle(rs.getString("title") + "(" + rs.getString("reply_cnt") + ")");
 				board.setWriter(rs.getString("writer"));
 				board.setContent(rs.getString("content"));
 				board.setCreationdate(rs.getString("creation_date"));

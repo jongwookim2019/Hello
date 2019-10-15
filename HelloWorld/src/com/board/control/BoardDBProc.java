@@ -18,7 +18,7 @@ public class BoardDBProc {
 		while (true) {
 			int menu = 0;
 			System.out.println("메뉴 선택 하세요.");
-			System.out.println("1.게시글 작성 2.게시글 리스트 3.한건 조회 4.수정  5.삭제  8.종료");
+			System.out.println("1.게시글 작성 2.게시글 리스트 3.한건 조회 4.수정  5.삭제  6.종료");
 			menu = sc.nextInt();
 			sc.nextLine();
 			if (menu == 1) {
@@ -32,10 +32,6 @@ public class BoardDBProc {
 			} else if (menu == 5) {
 				deleteBoard();
 			} else if (menu == 6) {
-
-			} else if (menu == 7) {
-
-			} else if (menu == 8) {
 				System.out.println("프로그램을 종료합니다.");
 				break;
 			}
@@ -116,10 +112,10 @@ public class BoardDBProc {
 				service.insertReply(board1);
 			} else if (subMenu == 2){
 				System.out.println("댓글 삭제:");
-				int origNo = sc.nextInt(); sc.nextLine();
+				int boardNo1 = sc.nextInt(); sc.nextLine();
 				BoardDB board1 = new BoardDB();
 				board1.setWriter(loginId);
-				board1.setBoardNo(origNo);
+				board1.setBoardNo(boardNo1);
 				service.deleteReply(board1);
 			} else {
 				return;

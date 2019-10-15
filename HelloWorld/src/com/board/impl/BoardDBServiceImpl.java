@@ -71,7 +71,7 @@ public class BoardDBServiceImpl implements BoardDBService {
 
 	@Override
 	public void deleteReply(BoardDB board) {
-		if (dao.checkResponsibility(board)) {
+		if (dao.checkReplyResponsibility(board)) {
 			dao.deleteReply(board);
 			System.out.println("삭제되었습니다.");
 		} else {
