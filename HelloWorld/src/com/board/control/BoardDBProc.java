@@ -116,9 +116,10 @@ public class BoardDBProc {
 				service.insertReply(board1);
 			} else if (subMenu == 2){
 				System.out.println("댓글 삭제:");
-				int boardNo1 = sc.nextInt();
+				int origNo = sc.nextInt(); sc.nextLine();
 				BoardDB board1 = new BoardDB();
 				board1.setWriter(loginId);
+				board1.setBoardNo(origNo);
 				service.deleteReply(board1);
 			} else {
 				return;

@@ -151,10 +151,10 @@ public class BoardDBDAO {
 
 	public void deleteReply(BoardDB board) {
 		conn = DAO.getConnect();
-		String sql = "delete boards where orig_no = ?";
+		String sql = "delete boards where board_no = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, board.getOrigNo());
+			pstmt.setInt(1, board.getBoardNo());
 			int r = pstmt.executeUpdate();
 			System.out.println(r + " 건이 삭제되었습니다.");
 
@@ -195,7 +195,7 @@ public class BoardDBDAO {
 
 	public List<BoardDB> getBoardList() {
 		conn = DAO.getConnect();
-		String sql = "select * from boards where orig_no is null order by 1 desc";
+		String sql = "select b.*, get_reply_cnt(b.board_no) as reply_cnt from boards b where orig_no is null order by 1 desc";
 		List<BoardDB> list = new ArrayList<>();
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -203,7 +203,7 @@ public class BoardDBDAO {
 			while (rs.next()) {
 				BoardDB board = new BoardDB();
 				board.setBoardNo(rs.getInt("board_no"));
-				board.setTitle(rs.getString("title"));
+				board.setTitle(rs.getString("title")+"("+rs.getString("reply_cnt")+")");
 				board.setWriter(rs.getString("writer"));
 				board.setContent(rs.getString("content"));
 				board.setCreationdate(rs.getString("creation_date"));
