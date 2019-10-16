@@ -7,37 +7,32 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.board.common.DAO;
-import com.board.model.BoardDB;
-
 public class DBDAO {
 	Connection conn = null;
 	ResultSet rs = null;
 	PreparedStatement pstmt = null;
-
-	public List<DB> getdepartmentName(String departmentName) {
+	
+	public void updateDepartment(DB db) {
 		conn = DAO.getConnect();
-		DB db = null;
-		String sql = "select * from employees where department_name = ?";
+		String sql
+	}
+
+	public List<DB> getdepartmentName() {
+		conn = DAO.getConnect();
+		String sql = "select * from employees";
 		List<DB> list = new ArrayList<>();
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, departmentName);
 			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				db = new DB();
+			while (rs.next()) {
+				DB db = new DB();
 				db.setEmployeeNo(rs.getInt("employee_no"));
 				db.setName(rs.getString("name"));
 				db.setDepartmentName(rs.getString("department_name"));
 				db.setSalary(rs.getInt("salary"));
 				db.setHareDate(rs.getDate("hare_date"));
-			} else {
-				DB db1 = new DB();
-				db1.setEmployeeNo(rs.getInt("employee_no"));
-				db1.setName(rs.getString("name"));
-				db1.setDepartmentName(rs.getString("department_name"));
-				db1.setSalary(rs.getInt("salary"));
-				db1.setHareDate(rs.getDate("hare_date"));
+				list.add(db);
+
 			}
 		} catch (SQLException e) {
 
@@ -49,7 +44,7 @@ public class DBDAO {
 				e.printStackTrace();
 			}
 		}
-		return null;
+		return list;
 	}
 
 	public DB getName(String name) {

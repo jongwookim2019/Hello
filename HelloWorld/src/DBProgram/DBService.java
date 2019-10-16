@@ -8,7 +8,7 @@ public interface DBService {
 
 	public DB getName(String name);
 
-	public List<DB> getdepartmentName(String departmentName);
+	public List<DB> getdepartmentName();
 
 	public void updateDepartment(DB db);
 

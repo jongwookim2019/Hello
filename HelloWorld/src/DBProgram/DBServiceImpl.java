@@ -18,9 +18,10 @@ public class DBServiceImpl implements DBService {
 	}
 
 	@Override
-	public List<DB> getdepartmentName(String departmentName) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<DB> getdepartmentName() {
+		List<DB> list = dao.getdepartmentName();
+		return list;
+		
 	}
 
 	@Override

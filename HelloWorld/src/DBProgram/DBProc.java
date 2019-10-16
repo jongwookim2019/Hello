@@ -33,23 +33,28 @@ public class DBProc {
 
 		}
 	}
+	public void updateDept() {
+		System.out.println("변경할 사원 번호:");
+		int empNo = sc.nextInt();
+		System.out.println("변경할 부서 이름:");
+		String deptName = sc.nextLine();
+		DB db = new DB();
+		db.setEmployeeNo(empNo);
+		db.setDepartmentName(deptName);
+		service.updateDepartment(db);
+		
+	}
+	
 
 	public void getdept() {
-		System.out.println("부서를 입력해주세요.");
-		String deptName = sc.nextLine();
-		System.out.println("==========부서 조회 ===========");
-		List<DB> db = service.getdepartmentName(deptName);
-		if (db == null) {
-			for (DB b : db) {
-				System.out.println(b.getEmployeeNo() + " | " + b.getName() + " | " + b.getDepartmentName() + " | "
-						+ b.getSalary() + " | " + b.getHareDate());
-			}
-		} else {
-			System.out.println("사원번호 :" + ((DB) db).getEmployeeNo());
-			System.out.println("사원명 :" + ((DB) db).getName());
-			System.out.println("부서이름 :" + ((DB) db).getDepartmentName());
-			System.out.println("급여 :" + ((DB) db).getSalary());
-			System.out.println("입사일:" + ((DB) db).getHareDate());
+		System.out.println("-------[전체글]-------");
+		System.out.println("==============================================");
+		System.out.println("사원번호 |  이름   |    부서     |  급여   | 고용일자 ");
+		System.out.println("==============================================");
+		List<DB> db = service.getdepartmentName();
+		for (DB b : db) {
+			System.out.println(b.getEmployeeNo() + " | " + b.getName() + " | " + b.getDepartmentName() + " | "
+					+ b.getSalary() + " | " + b.getHareDate());
 		}
 
 	}
