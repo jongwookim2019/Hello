@@ -1,0 +1,15 @@
+OracleXE112_Win64 파일 압축해제
+setup 실행 기본 루트로 설치
+C:\oraclexe\app\oracle\product\11.2.0\server\jdbc\lib
+ojdbc6 파일 복사
+C:\Program Files\Java\jre1.8.0_221\lib\ext 로 이동
+ojdbc6 파일 붙여넣기
+
+ecilpse 실행
+좌측 helloWorld 아래 jre system library 우클릭
+build path - configure build path 실행
+우측 add external jars 클릭
+C:\Program Files\Java\jre1.8.0_221\lib\ext로 가서
+ojdbc6 파일 실행
+apply and close 체크
+ecilpse 재부팅

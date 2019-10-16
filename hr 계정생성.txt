@@ -1,0 +1,3 @@
+sys계정에서 hr 계정 접속가능하게 하는법
+alter user hr account unlock;
+alter user hr identified by hr;
