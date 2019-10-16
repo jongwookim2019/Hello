@@ -4,13 +4,15 @@ import java.util.List;
 
 public interface DBService {
 
-	public void insertEmployee(DB db);
+	public void insertEmp(DB db);
 
-	public DB getName(String name);
+	public List<DB> getName(String name);
 
-	public List<DB> getdepartmentName();
+	public DB getDeptName(String DeptName);
 
-	public void updateDepartment(DB db);
+	public List<DB> getEmpList();
 
-	public void deleteEmployee(DB db);
+	public void updateDept(DB db);
+
+	public void deleteEmp(DB db);
 }

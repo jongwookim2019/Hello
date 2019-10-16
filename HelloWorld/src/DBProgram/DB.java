@@ -3,16 +3,16 @@ package DBProgram;
 import java.sql.Date;
 
 public class DB {
-	int employeeNo;
+	int empId;
 	String name;
-	String departmentName;
+	String deptName;
 	int salary;
-	Date hareDate;
-	public int getEmployeeNo() {
-		return employeeNo;
+	Date hireDate;
+	public int getEmpId() {
+		return empId;
 	}
-	public void setEmployeeNo(int employeeNo) {
-		this.employeeNo = employeeNo;
+	public void setEmpId(int empNo) {
+		this.empId = empNo;
 	}
 	public String getName() {
 		return name;
@@ -20,11 +20,11 @@ public class DB {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getDepartmentName() {
-		return departmentName;
+	public String getDeptName() {
+		return deptName;
 	}
-	public void setDepartmentName(String departmentName) {
-		this.departmentName = departmentName;
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
 	}
 	public int getSalary() {
 		return salary;
@@ -32,11 +32,10 @@ public class DB {
 	public void setSalary(int salary) {
 		this.salary = salary;
 	}
-	public Date getHareDate() {
-		return hareDate;
+	public Date getHireDate() {
+		return hireDate;
 	}
-	public void setHareDate(Date date) {
-		this.hareDate = date;
+	public void setHireDate(Date hireDate) {
+		this.hireDate = hireDate;
 	}
-	
 }

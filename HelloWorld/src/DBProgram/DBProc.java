@@ -21,64 +21,87 @@ public class DBProc {
 			} else if (menu == 2) {
 				getName();
 			} else if (menu == 3) {
-				getdept();
+				getEmpList();
 			} else if (menu == 4) {
-
+				updateDept();
 			} else if (menu == 5) {
 				deleteEmployee();
 			} else if (menu == 6) {
+				getDeptName();
+			} else if (menu == 7) {
 				System.out.println("프로그램을 종료합니다.");
 				break;
 			}
 
 		}
 	}
+
+	public void getDeptName() {
+		System.out.println("부서를 입력해주세요.");
+		String deptname = sc.nextLine();
+		System.out.println("==========부서 조회 ===========");
+		DB db = service.getDeptName(deptname);
+		if (db != null && !db.getDeptName().equals("") ) {
+			System.out.println("사원번호 :" + db.getEmpId());
+			System.out.println("사원명 :" + db.getName());
+			System.out.println("부서이름 :" + db.getDeptName());
+			System.out.println("급여 :" + db.getSalary());
+			System.out.println("입사일:" + db.getHireDate());
+		} else {
+			List<DB> list = service.getEmpList();
+			for (DB e : list) {
+				System.out.println("-> " + e.getEmpId() + "|" + e.getName() + "|" + e.getDeptName() + "|"
+						+ e.getSalary() + "|" + "|" + e.getHireDate());
+			}
+		}
+	}
+
 	public void updateDept() {
 		System.out.println("변경할 사원 번호:");
-		int empNo = sc.nextInt();
+		int empId = sc.nextInt();
+		sc.nextLine();
 		System.out.println("변경할 부서 이름:");
 		String deptName = sc.nextLine();
 		DB db = new DB();
-		db.setEmployeeNo(empNo);
-		db.setDepartmentName(deptName);
-		service.updateDepartment(db);
-		
-	}
-	
+		db.setEmpId(empId);
+		db.setDeptName(deptName);
+		service.updateDept(db);
 
-	public void getdept() {
+	}
+
+	public void getEmpList() {
 		System.out.println("-------[전체글]-------");
 		System.out.println("==============================================");
 		System.out.println("사원번호 |  이름   |    부서     |  급여   | 고용일자 ");
 		System.out.println("==============================================");
-		List<DB> db = service.getdepartmentName();
+		List<DB> db = service.getEmpList();
 		for (DB b : db) {
-			System.out.println(b.getEmployeeNo() + " | " + b.getName() + " | " + b.getDepartmentName() + " | "
-					+ b.getSalary() + " | " + b.getHareDate());
+			System.out.println(b.getEmpId() + " | " + b.getName() + " | " + b.getDeptName() + " | " + b.getSalary()
+					+ " | " + b.getHireDate());
 		}
 
 	}
 
 	public void deleteEmployee() {
 		System.out.println("삭제할 사원 번호:");
-		int empNo = sc.nextInt();
+		int empID = sc.nextInt();
 		sc.nextLine();
 		DB db = new DB();
-		db.setEmployeeNo(empNo);
-		service.deleteEmployee(db);
+		db.setEmpId(empID);
+		service.deleteEmp(db);
 	}
 
 	public void getName() {
 		System.out.println("이름을 입력해주세요.");
 		String name = sc.nextLine();
 		System.out.println("==========사원 조회 ===========");
-		DB db = service.getName(name);
-		if (db != null) {
-			System.out.println("사원번호 :" + db.getEmployeeNo());
+		List<DB> db = service.getName(name);
+		if (db != null && !db.getName().equals("") ) {
+			System.out.println("사원번호 :" +  db.getEmpId());
 			System.out.println("사원명 :" + db.getName());
-			System.out.println("부서이름 :" + db.getDepartmentName());
-			System.out.println("급여 :" + db.getSalary());
-			System.out.println("입사일:" + db.getHareDate());
+			System.out.println("부서이름 :" + db.getDeptName());
+			System.out.println("급여 :" +  db.getSalary());
+			System.out.println("입사일:" +  db.getHireDate());
 		}
 	}
 
@@ -92,9 +115,9 @@ public class DBProc {
 		int salary = sc.nextInt();
 		DB db = new DB();
 		db.setName(name);
-		db.setDepartmentName(deptname);
+		db.setDeptName(deptname);
 		db.setSalary(salary);
-		service.insertEmployee(db);
+		service.insertEmp(db);
 	}
 
 }

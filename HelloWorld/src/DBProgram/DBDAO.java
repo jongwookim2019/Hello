@@ -11,26 +11,43 @@ public class DBDAO {
 	Connection conn = null;
 	ResultSet rs = null;
 	PreparedStatement pstmt = null;
-	
+
 	public void updateDepartment(DB db) {
 		conn = DAO.getConnect();
-		String sql
+		String sql = "update emp set dept_name=? where emp_id = ?";
+		int n = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			if (db.getDeptName() != null && !db.getDeptName().equals("")) {
+				pstmt.setString(++n, db.getDeptName());
+			}
+			pstmt.setInt(++n, db.getEmpId());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
-	public List<DB> getdepartmentName() {
+	public List<DB> getEmpList() {
 		conn = DAO.getConnect();
-		String sql = "select * from employees";
+		String sql = "select * from emp";
 		List<DB> list = new ArrayList<>();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				DB db = new DB();
-				db.setEmployeeNo(rs.getInt("employee_no"));
+				db.setEmpId(rs.getInt("emp_id"));
 				db.setName(rs.getString("name"));
-				db.setDepartmentName(rs.getString("department_name"));
+				db.setDeptName(rs.getString("dept_name"));
 				db.setSalary(rs.getInt("salary"));
-				db.setHareDate(rs.getDate("hare_date"));
+				db.setHireDate(rs.getDate("hire_date"));
 				list.add(db);
 
 			}
@@ -47,21 +64,21 @@ public class DBDAO {
 		return list;
 	}
 
-	public DB getName(String name) {
+	public DB getDeptName(String deptName) {
 		DB db = null;
 		conn = DAO.getConnect();
-		String sql = "select * from employees where name = ?";
+		String sql = "select * from emp where dept_name = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, name);
+			pstmt.setString(1, deptName);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				db = new DB();
-				db.setEmployeeNo(rs.getInt("employee_no"));
+				db.setEmpId(rs.getInt("emp_id"));
 				db.setName(rs.getString("name"));
-				db.setDepartmentName(rs.getString("department_name"));
+				db.setDeptName(rs.getString("dept_name"));
 				db.setSalary(rs.getInt("salary"));
-				db.setHareDate(rs.getDate("hare_date"));
+				db.setHireDate(rs.getDate("hire_date"));
 			}
 		} catch (SQLException e) {
 
@@ -77,12 +94,44 @@ public class DBDAO {
 
 	}
 
-	public void deleteEmployee(DB db) {
+	public List<DB> getName(String name) {
+		List<DB> list = new ArrayList<>();
+		DB db = null;
 		conn = DAO.getConnect();
-		String sql = "delete employees where employee_no = ?";
+		String sql = "select * from emp where name = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, db.getEmployeeNo());
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				db = new DB();
+				db.setEmpId(rs.getInt("emp_id"));
+				db.setName(rs.getString("name"));
+				db.setDeptName(rs.getString("dept_name"));
+				db.setSalary(rs.getInt("salary"));
+				db.setHireDate(rs.getDate("hire_date"));
+				list.add(db);
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+
+	}
+
+	public void deleteEmp(DB db) {
+		conn = DAO.getConnect();
+		String sql = "delete emp where emp_id = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, db.getEmpId());
 			int r = pstmt.executeUpdate();
 			System.out.println(r + " 건이 삭제되었습니다.");
 
@@ -101,11 +150,11 @@ public class DBDAO {
 
 	public void insertEmployee(DB db) {
 		conn = DAO.getConnect();
-		String sql = "insert into employees values(emp_seq.nextval,?,?,?,sysdate)";
+		String sql = "insert into emp values(emp_seq.nextval,?,?,?,sysdate)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, db.getName());
-			pstmt.setString(2, db.getDepartmentName());
+			pstmt.setString(2, db.getDeptName());
 			pstmt.setInt(3, db.getSalary());
 			int r = pstmt.executeUpdate();
 			System.out.println(r + "건이 입력되었습니다.");
