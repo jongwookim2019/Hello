@@ -31,7 +31,7 @@ class HighStudent {
 
 public class PredicateExample {
 
-	static List<HighStudent> list = Arrays.asList(new HighStudent("김성현", "남자", 87), new HighStudent("이지아", "여자", 100),
+	static List<HighStudent> list = Arrays.asList(new HighStudent("김성현", "남자", 87), new HighStudent("이지아", "여자", 87),
 			new HighStudent("이진성", "남자", 89), new HighStudent("원유리", "여자", 83));
 
 	static double avg(Predicate<HighStudent> pred) {
@@ -53,8 +53,7 @@ public class PredicateExample {
 
 			@Override
 			public boolean test(HighStudent t) {
-				t.getSex().equals("남자");
-				return true; 
+				return t.getSex().equals("남자");
 			}
 		};
 		double avg = avg(pred);
