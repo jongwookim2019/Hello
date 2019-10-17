@@ -13,8 +13,8 @@ public class DBServiceImpl implements DBService {
 
 	@Override
 	public List<DB> getName(String name) {
-		dao.getName(name);
-		return dao.getName(name);
+		 List<DB> list = dao.getName(name);
+		 return list;
 	}
 
 	@Override
@@ -37,7 +37,8 @@ public class DBServiceImpl implements DBService {
 	}
 
 	@Override
-	public DB getDeptName(String DeptName) {
-		return dao.getDeptName(DeptName);
+	public List<DB> getDeptName(String DeptName) {
+		 List<DB> list = dao.getDeptName(DeptName);
+		 return list;
 	}
 }

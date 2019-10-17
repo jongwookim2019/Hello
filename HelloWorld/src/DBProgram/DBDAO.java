@@ -36,7 +36,7 @@ public class DBDAO {
 
 	public List<DB> getEmpList() {
 		conn = DAO.getConnect();
-		String sql = "select * from emp";
+		String sql = "select e.*, get_dept_cnt(e.dept_name) as dept_cnt from emp e";
 		List<DB> list = new ArrayList<>();
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -45,7 +45,7 @@ public class DBDAO {
 				DB db = new DB();
 				db.setEmpId(rs.getInt("emp_id"));
 				db.setName(rs.getString("name"));
-				db.setDeptName(rs.getString("dept_name"));
+				db.setDeptName(rs.getString("dept_name") + "(" + rs.getString("dept_cnt") + ")");
 				db.setSalary(rs.getInt("salary"));
 				db.setHireDate(rs.getDate("hire_date"));
 				list.add(db);
@@ -64,21 +64,22 @@ public class DBDAO {
 		return list;
 	}
 
-	public DB getDeptName(String deptName) {
-		DB db = null;
+	public List<DB> getDeptName(String deptName) {
+		List<DB> list = new ArrayList<>();
 		conn = DAO.getConnect();
-		String sql = "select * from emp where dept_name = ?";
+		String sql = "select * from emp where dept_name=?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, deptName);
 			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				db = new DB();
+			while (rs.next()) {
+				DB db = new DB();
 				db.setEmpId(rs.getInt("emp_id"));
 				db.setName(rs.getString("name"));
 				db.setDeptName(rs.getString("dept_name"));
 				db.setSalary(rs.getInt("salary"));
 				db.setHireDate(rs.getDate("hire_date"));
+				list.add(db);
 			}
 		} catch (SQLException e) {
 
@@ -90,21 +91,21 @@ public class DBDAO {
 				e.printStackTrace();
 			}
 		}
-		return db;
+		return list;
 
 	}
 
 	public List<DB> getName(String name) {
-		List<DB> list = new ArrayList<>();
-		DB db = null;
+
 		conn = DAO.getConnect();
+		List<DB> list = new ArrayList<>();
 		String sql = "select * from emp where name = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, name);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				db = new DB();
+				DB db = new DB();
 				db.setEmpId(rs.getInt("emp_id"));
 				db.setName(rs.getString("name"));
 				db.setDeptName(rs.getString("dept_name"));

@@ -21,14 +21,12 @@ public class DBProc {
 			} else if (menu == 2) {
 				getName();
 			} else if (menu == 3) {
-				getEmpList();
+				getDeptName();
 			} else if (menu == 4) {
 				updateDept();
 			} else if (menu == 5) {
 				deleteEmployee();
 			} else if (menu == 6) {
-				getDeptName();
-			} else if (menu == 7) {
 				System.out.println("프로그램을 종료합니다.");
 				break;
 			}
@@ -40,13 +38,15 @@ public class DBProc {
 		System.out.println("부서를 입력해주세요.");
 		String deptname = sc.nextLine();
 		System.out.println("==========부서 조회 ===========");
-		DB db = service.getDeptName(deptname);
-		if (db != null && !db.getDeptName().equals("") ) {
-			System.out.println("사원번호 :" + db.getEmpId());
-			System.out.println("사원명 :" + db.getName());
-			System.out.println("부서이름 :" + db.getDeptName());
-			System.out.println("급여 :" + db.getSalary());
-			System.out.println("입사일:" + db.getHireDate());
+		
+		
+		
+		if (!deptname.equals("")) {//전체보기
+			List<DB> db = service.getDeptName(deptname);
+			for (DB dB : db) {
+				System.out.println(dB.getEmpId() + " | " + dB.getName() + " | " + dB.getDeptName() + " | " + dB.getSalary()
+						+ " | " + dB.getHireDate());
+			}
 		} else {
 			List<DB> list = service.getEmpList();
 			for (DB e : list) {
@@ -54,6 +54,7 @@ public class DBProc {
 						+ e.getSalary() + "|" + "|" + e.getHireDate());
 			}
 		}
+
 	}
 
 	public void updateDept() {
@@ -96,13 +97,11 @@ public class DBProc {
 		String name = sc.nextLine();
 		System.out.println("==========사원 조회 ===========");
 		List<DB> db = service.getName(name);
-		if (db != null && !db.getName().equals("") ) {
-			System.out.println("사원번호 :" +  db.getEmpId());
-			System.out.println("사원명 :" + db.getName());
-			System.out.println("부서이름 :" + db.getDeptName());
-			System.out.println("급여 :" +  db.getSalary());
-			System.out.println("입사일:" +  db.getHireDate());
+		for (DB dB : db) {
+			System.out.println(((DB) dB).getEmpId() + " | " + ((DB) dB).getName() + " | " + ((DB) dB).getDeptName()
+					+ " | " + ((DB) dB).getSalary() + " | " + ((DB) dB).getHireDate());
 		}
+
 	}
 
 	public void writeBoard() {

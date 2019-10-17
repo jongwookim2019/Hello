@@ -8,7 +8,7 @@ public interface DBService {
 
 	public List<DB> getName(String name);
 
-	public DB getDeptName(String DeptName);
+	public List<DB> getDeptName(String DeptName);
 
 	public List<DB> getEmpList();
 
