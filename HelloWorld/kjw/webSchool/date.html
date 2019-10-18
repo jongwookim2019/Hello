@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="cal"></div>
+    <div id="calm"></div>
+    <script>
+        function getCal(y, m) {
+            console.log(y.getFullYear() + "년" + (m.getMonth() + 1) + m.getDate() + "일" + m.getDay() + "요일");
+
+        }
+        // var l = new Date(2019, 9, 1); // 10월 1일
+        // var d = new Date(2019, 10, 0); // 10월 31일(마지막날)
+        // console.log(d.getFullYear() + "년" + (d.getMonth() + 1) + "월" + d.getDate() + "일" + d.getDay() + "요일");
+        // var tag = "<table border=1>";
+        // tag += "<tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th>"
+        // 해당월의 1일부터 마지막날(30) <td>날짜</td>
+        function getDay(d) {
+            var m = new Date(2019, d, 0);
+            var tag = "<table border=1>";
+            tag += "<tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th>"
+            for (var i = 1; i < 31; i++) {
+                tag += "<tr><td>" + i + "일" + "</td>";
+            }
+            tag += "</tr><tr>"
+            tag += "</table>";
+        }
+        
+        // document.getElementById("cal").innerHTML = tag;
+        document.getElementById("calm").innerHTML = getDay(10);
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="cal"></div>
+    <div id="calexample"></div>
+    <script>
+      
+        var year = prompt('연도를 입력하세요');
+        var month = prompt('월을 입력하세요');
+        document.getElementById("calexample").innerHTML = getCal(year, month);
+        function getCal(year, month) {
+            var l = new Date(year, (month-1), 1);
+            var m = new Date(year, (month), 0);
+            var tag = "<h4>"+ year+ "년" + month+ "월" + "</h4>"
+            tag += "<table border=1>";
+            tag += "<tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th>"
+            tag += "<tr>"
+            for (var i = 0; i < l.getDay(); i++) {
+                tag += "<td>" + "" + "</td>"
+            }
+
+            for (var i = 1; i <= m.getDate(); i++) {
+                tag += "<td>" + i + "</td>";
+                if ((i + l.getDay()) % 7 == 0)
+                    tag += "</tr><tr>"
+            }
+
+            tag += "</table>";
+
+
+            document.getElementById("cal").innerHTML = tag;
+        }
+         
+    </script>
+</body>
+
+</html>
