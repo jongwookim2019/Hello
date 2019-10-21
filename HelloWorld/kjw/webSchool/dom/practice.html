@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function chkForm() {
+            var form = document.myform;
+            var name = form.name.value;
+            var form2 = document.myform2;
+            var id = from2.id.value;
+            var form3 = document.myform3;
+            var passwd = form3.passwd.value;
+
+            alert("이름 :" + name + " \n아이디 :" + id + " \n비밀번호 :" + passwd)
+        }
+        
+</script>
+<form>
+<p>이름 :</p><input type="text" name="name"> <br>
+<p>아이디 :</p><input type="text" name="id"> <br>
+<p>비밀번호 :</p><input type="text" name="passwd"> <br>
+<INPUT type="button" value="확인" onClick="chkForm()">
+</form>
+</body>
+</html>

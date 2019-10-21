@@ -23,18 +23,27 @@
                 return this.name + ", " + this.model + ", " + this.color;
             }
         }
-        car.start();
-        car.break();
-        console.log("this car : " + car.fullName() + "weight:" + car["weight"]);
+        // car.start();
+        // car.break();
+        // console.log("this car : " + car.fullName() + "weight:" + car["weight"]);
+        for (i in car) {
+            console.log(typeof i, i, car[i]);
+            if ((typeof car[i]) == "function") {
+                console.log(car[i]());
+            }
+            else {
+                console.log(car[i]);
+            }
+        }
         var car2 = new Object();
         car2.name = "k5";
         car2.color = "blue";
         car2.model = "hybrid"
-        car2.fullName = function () {
-           return this.name + ", " + this.model + ", " + this.color;
-        }
-        console.log(car2.name + ", " + car2.fullName()+"weight:" + car2["weight"]);
-        console.log(this)
+        // car2.fullName = function () {
+        //    return this.name + ", " + this.model + ", " + this.color;
+        // }
+        // console.log(car2.name + ", " + car2.fullName()+"weight:" + car2["weight"]);
+        // console.log(this)
 
     </script>
 </head>

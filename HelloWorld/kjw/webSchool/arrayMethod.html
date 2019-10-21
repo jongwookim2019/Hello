@@ -21,6 +21,11 @@
         fruits.push("Kiwi")
         fruits.unshift("Strawberry")
         console.log(fruits.join("+"));
+
+        fruits[fruits.length] = "Melon"; //6
+        fruits[fruits.length] = "Grape"; //7
+        fruits[10] = "Lemon"; //10 8,9는  null값
+        console.log(fruits.join(","));
     </script>
 </body>
 

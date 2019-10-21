@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function chkForm() {
+
+            var form = document.myform;
+
+            var email = form.email.value + form.mailadd.value;
+
+            var mailsvr
+
+            var radioObj = document.all('mail');
+
+
+            if (radioObj[0].checked) {
+                mailsvr = "허용";
+
+            } else {
+
+                mailsvr = "허용안함";
+            }
+
+            var favor1 = "";
+            var favor2 = "";
+            var favor3 = "";
+            if (form.game.checked) {
+                favor1 = form.game.value;
+            }
+
+            if (form.Sports.checked) {
+                favor2 = form.Sports.value;
+            }
+            if (form.Computer.checked) {
+                favor3 = form.Computer.value;
+            }
+
+            alert("전자우편주소 :" + email + " \n메일링서비스 :" + mailsvr + " \n관심분야 :" + favor1 + "," + favor2 + "," + favor3)
+        }
+
+        function cancel() {
+            del = confirm("입력된 값들을 삭제합니까?")
+            if (del == true) {
+                alert("입력된 값들을 삭제합니다.")
+                return true
+            }
+            else {
+                alert("입력된 값들을 삭제하지 않습니다.")
+                return false
+            }
+        }
+
+    </script>
+
+    <BODY>
+        <center>
+            <p>
+                <h2> 필수 입력 사항
+
+
+
+                    <form name="myform">
+                        전자우편주소
+                        <input type=text name=email>@
+                        <select name="mailadd">
+                            <option value="@hanmail.net">한메일
+                            <option value="@naver.com">네이버
+                            <option value="@hotmail.com">핫메일
+                        </select>
+                        <br>
+                        메일링 서비스
+                        <input type=radio name=mail value=ok>허용<input type=radio name=mail value=not>허용안함
+                        <br>
+                        관심분야 <input type=checkbox name=game value=game>Game
+                        <input type=checkbox name=Sports value=Sports>Sports
+                        <input type=checkbox name=Computer value=Computer>Computer
+                        <br>
+                        <INPUT type="submit" value="가입하기" onClick="chkForm()">
+                        <INPUT type="reset" value="다시입력" onClick="cancel()">
+
+
+                    </form>
+    </body>
+
+</html>
