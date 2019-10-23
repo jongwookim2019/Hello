@@ -28,7 +28,7 @@
         }
         function getXML(elem) {
             // console.log(elem.responseXML);
-            var xml = elem.responseXML
+            var xml = elem.responseXML;
             var cds = xml.getElementsByTagName("CD");
             console.log(cds[0].childNodes[1].childNodes[0].nodeValue);
             var tag = "<ul>";
@@ -41,10 +41,12 @@
 
         }
           function addData(elem) {
+              console.log(xml)
             var xml = elem.responseXML;
             var cds = xml.getElementsByTagName("CD");
             var tag ="<tr>";
             for (var i=0; i<cds.length; i++) {
+                if (i % 2 == 1)
                 tag += "<td>" + cds[0].childNodes[i].childNodes[0].nodeValue; +"</td>"
             }
             tag += "</tr>"
@@ -85,32 +87,6 @@
             $table.append(tr);
             document.getElementById("bdy").append($table);
         
-        }
-
-
-        function loadXML() {
-            var xhtp = new XMLHttpRequest();
-            xhtp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    getXML(this);
-                }
-            }
-            xhtp.open("get", "cd_catalog.xml");
-            xhtp.send();
-        }
-        function getXML(elem) {
-            // console.log(elem.responseXML);
-            var xml = elem.responseXML
-            var cds = xml.getElementsByTagName("CD");
-            console.log(cds[0].childNodes[1].childNodes[0].nodeValue);
-            var tag = "<ul>";
-            for (var i=0; i<cds.length; i++) {
-                tag += "<li>" + cds[i].childNodes[1].childNodes[0].nodeValue;
-            }
-            tag += "</ul>";
-            document.getElementById("showXML").innerHTML
-            document.getElementById("showXML").innerHTML = tag;
-
         }
 
     </script>
